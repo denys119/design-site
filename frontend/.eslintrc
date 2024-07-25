@@ -1,0 +1,79 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": ["@nuxtjs/eslint-config-typescript", "plugin:nuxt/recommended"],
+  "plugins": [],
+  "rules": {
+    //TS
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "@typescript-eslint/no-use-before-define": ["error", "nofunc"],
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/quotes": ["error", "single"],
+    "@typescript-eslint/brace-style": "error",
+    "@typescript-eslint/keyword-spacing": "error",
+    "@typescript-eslint/lines-between-class-members": ["warn", "always", { "exceptAfterSingleLine": true }],
+    // separation from recommended
+    "@typescript-eslint/no-explicit-any": 2, // using the any type defeats the purpose of using TypeScript; When any is used, all compiler type checks around that value are ignored
+    "@typescript-eslint/explicit-module-boundary-types": "off", // explicit types for function return values and arguments makes it clear to any calling code what is the module boundary's input and output
+    "@typescript-eslint/ban-types": "off", // some builtin types have aliases, some types are considered dangerous or harmful
+    "vue/multi-word-component-names": "off",
+    "vue/no-multiple-template-root": "off",
+    // separation from Vue recommended
+    "vue/script-setup-uses-vars": "error",
+    "vue/no-v-html": "off", // disallow use of v-html to prevent XSS attack
+    "vue/key-spacing": "error",
+    "vue/brace-style": "error",
+    "vue/keyword-spacing": "error",
+    // best practices
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "semi": ["error", "always", { "omitLastInOneLineBlock": true }],
+    "curly": ["error", "multi-line"],
+    "space-before-function-paren": 0,
+    "arrow-parens": 0,
+    "no-global-assign": "warn", // disallow assignments to native objects or read-only global variables
+    "no-var": "error", // This rule is aimed at discouraging the use of var and encouraging the use of const or let instead.
+    "prefer-const": "error", // const declaration tells readers, "this variable is never reassigned," reducing cognitive load and improving maintainability.
+    "no-use-before-define": ["error", "nofunc"], // block-level bindings (let and const) introduce a "temporal dead zone"
+    "no-implicit-globals": "warn", // disallow declarations in the global scope
+    "no-console": ["error", { "allow": ["warn", "error"] }], // disallow console logs
+    "eqeqeq": ["error", "always"], // require the use of `===` and `!==`
+    "no-lonely-if": 0, // disallow `if` statements as the only statement in `else` blocks
+    "vue/no-mutating-props": 0,
+    "vue/no-v-model-argument": 0,
+    "dot-notation": 0,
+    "no-prototype-builtins": 0,
+    "import/no-named-as-default-member": 0,
+    // styling
+    "indent": ["error", 2,
+      {
+        "SwitchCase": 1
+      }], // enforce consistent indentation
+    "no-multi-spaces": "error", // disallow mixed spaces and tabs for indentation
+    "no-trailing-spaces": "error", // disallow trailing whitespace at the end of lines
+    "no-multiple-empty-lines": "error", // disallow multiple empty lines
+    "one-var-declaration-per-line": "error", // require or disallow newlines around variable declarations
+    "no-whitespace-before-property": "error", // disallow whitespace before properties
+    "vue/html-indent": ["error", 2],
+    "vue/script-indent": ["error", 2,
+      {
+        "switchCase": 1
+      }],
+    "vue/max-attributes-per-line": ["error", {
+      "singleline": {
+        "max": 2
+      },
+      "multiline": {
+        "max": 1
+      }
+    }],
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }] // require or disallow an empty line between class members
+  }
+}

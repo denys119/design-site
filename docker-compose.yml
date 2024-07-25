@@ -1,0 +1,59 @@
+version: '3.8'
+services:
+  strapi:
+    image: project_strapi:latest
+    container_name: strapi-project
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    networks:
+      - project-app-network
+    links:
+      - db:db
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - "1337:1337"
+
+  db:
+    image: postgres:12.0-alpine
+    container_name: db-strapi-project
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    networks:
+      - project-app-network
+    volumes:
+      - strapidata:/var/lib/postgresql/data/
+      - ./backend/db_backup:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+
+  nuxt:
+    image: project_nuxt:latest
+    container_name: nuxt-project
+    restart: on-failure
+    ports:
+      - "8889:3000"
+    command: >
+      sh -c "yarn start"
+    networks:
+      - project-app-network
+
+networks:
+  project-app-network:
+    driver: bridge
+
+volumes:
+  strapidata:

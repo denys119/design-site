@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_page_base_descriptions",
+  "info": {
+    "displayName": "BaseDescription"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
